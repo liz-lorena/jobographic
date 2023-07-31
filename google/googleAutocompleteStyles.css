@@ -1,0 +1,27 @@
+/*
+  For styling query autocomplete/suggestion in the address input
+*/
+    
+    .addressSuggestion {
+    background-color: #e1e1e1d9;
+    padding: 5px 10px;
+    font-size: .8em;
+    color: #4b4b4b;
+    border-bottom: 1px solid #9a9a9ab3;
+    }
+    
+    .addressSuggestion:hover {
+      background-color: #bfd7ff;
+      padding: 5px 10px;
+      font-size:.8em;
+      color: grey;
+      border-bottom: 1px solid #EFEFEF;
+    }
+    
+    .highlightSuggestion {
+      background-color: #bfd7ff;
+      padding: 5px 10px;
+      font-size:.8em;
+      color: grey;
+      border-bottom: 1px solid #EFEFEF;
+    }

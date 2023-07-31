@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <title>Job Search | JoboGraphic</title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+  <script src="https://use.fontawesome.com/61038b3f9a.js"></script>
+  <script src="/jobographic/google/googleAutocomplete.js"></script>
+  <script src="/jobographic/githubjobs/githubScript.js"></script>
+  <link rel="stylesheet" href="/jobographic/google/googleAutocompleteStyles.css">
+  <link rel="stylesheet" href="/jobographic/githubjobs/githubStyles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+
+<body>
+
+  <!-- Nav Bar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light" id="nav">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+    <a class="navbar-brand" id="brand" href="index.html">JoboGraphic <i class="fa fa-map-marker" aria-hidden="true"></i>
+</a>
+
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" href="jobSearch.html">Jobs</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="companySearch.html">Companies</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="attr" href='https://jobs.github.com/'>powered by <img src='img/github.png' title='Job Search' /></a>
+        </li>
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+        <li class="mr-2">
+          <a class="nav-link" href="about.html">About Us</a>
+        </li>
+      </ul>
+      <form action="contact.html">
+        <button class="btn btn-primary navbar-btn btn-sm" style="cursor: pointer;">Send Feedback</button>
+      </form>
+    </div>
+  </nav>
+  <!-- End of Nav Bar -->
+
+  <!-- Search Bar Navigation -->
+  <div class="container-fluid searchNavContainer" id="#searchNavContainer">
+    <div class="row row-shadow">
+      <div class="col-lg-4" id="target1">
+        <div class="container">
+          <h3 id="results">Job Search Results</h3>
+        </div>
+      </div>
+
+      <!-- Input Fields -->
+      <div class="col-lg-8" id="target2">
+        <form role="form" id="getjobs_form">
+          <div class="form-row">
+            <div class="col-lg-6 px-0">
+              <!-- Location Input Field -->
+              <input id="l" name="l" class="form-control addressInput" type="search" placeholder="Search by address" aria-label="Search" autocomplete="off">
+              <div class="dropdown" id="querrySuggestion"></div>
+              <div id="placeidholder" style="display:hidden;"></div>
+            </div>
+
+            <div class="col-lg-3 px-0">
+              <!-- Description/ Keywords Input Field -->
+              <input id="q" class="form-control jobInput" type="search" name="description" placeholder="Type a keyword" aria-label="Search" autocomplete="off">
+            </div>
+
+            <div class="col-lg-2 px-0">
+              <!-- Job Type Dropdown -->
+              <select class="custom-select" id="jt" name="jt">
+            <option value="">All job types</option>
+            <option value="true">Only full-time</option>
+           </select>
+            </div>
+
+            <div class="col-1 px-0">
+              <!-- Search Button -->
+              <button id="searchBtn" class="btn btn-primary btn-md" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <!-- End of Input Fields -->
+    </div>
+  </div>
+  <!-- End of Search Bar Navigation -->
+
+  <!-- Main Page Contents -->
+  <div class="container-fluid contentContainer">
+    <!--Results display in this jobPanel-------------->
+    <div class="pull-left" id="jobPanel">
+      <div id="accordion" role="tablist">
+
+        <!-- Errors Appended Here -->
+        <div id="errors"></div>
+
+        <!-- Search Results Appended Here-->
+        <ul id="output" class="list-group">
+        </ul>
+
+        <!-- Job Template -->
+        <template id="job">
+                    <li class="job list-group-item">
+                        <span class="title">{{title}}</span><br>
+                        <span class="location">{{location}}</span><br>
+                        <span class="type">{{type}}</span><br>
+                        <span class="url">{{url}}</span>
+                        <span class="how_to_apply">{{how_to_apply}}</span>
+                        <span class="company">{{company}}</span>
+                        <span class="company_logo">{{company_logo}}</span>
+                        <span class="company_url">{{company_url}}</span><br>
+                        <span class="created_at">{{created_at}}</span><br>
+                        <button id="directions" type="button" class="btn btn-primary">Find Route</button>
+                        <br>
+                    </li>
+        </template>
+        <!-- End of Job Template -->
+
+        <!--<div class="card">-->
+        <!--  <div class="card-header" role="tab" id="headingOne">-->
+        <!--    <h5 class="mb-0">-->
+        <!--      <a data-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">-->
+        <!--  Full Stack Web Developer-->
+        <!--</a>-->
+        <!--    </h5>-->
+        <!--  </div>-->
+
+        <!--  <div id="collapseOne" class="collapse" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">-->
+        <!--    <div class="card-body">-->
+        <!--      <a href="#">asdfasdf</a> Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch-->
+        <!--      3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice-->
+        <!--      lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.-->
+        <!--    </div>-->
+        <!--  </div>-->
+        <!--</div>-->
+        <!--<div class="card">-->
+        <!--  <div class="card-header" role="tab" id="headingTwo">-->
+        <!--    <h5 class="mb-0">-->
+        <!--      <a class="collapsed" data-toggle="collapse" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">-->
+        <!--  Web Analyst-->
+        <!--</a>-->
+        <!--    </h5>-->
+        <!--  </div>-->
+        <!--  <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo" data-parent="#accordion">-->
+        <!--    <div class="card-body">-->
+        <!--      <a href="#">asdfasdf</a> Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch-->
+        <!--      3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice-->
+        <!--      lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.-->
+        <!--    </div>-->
+        <!--  </div>-->
+        <!--</div>-->
+        <!--<div class="card">-->
+        <!--  <div class="card-header" role="tab" id="headingThree">-->
+        <!--    <h5 class="mb-0">-->
+        <!--      <a class="collapsed" data-toggle="collapse" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">-->
+        <!--  Web Developer-->
+        <!--</a>-->
+        <!--    </h5>-->
+        <!--  </div>-->
+        <!--  <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree" data-parent="#accordion">-->
+        <!--    <div class="card-body">-->
+        <!--      Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird-->
+        <!--      on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table,-->
+        <!--      raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.-->
+        <!--    </div>-->
+        <!--  </div>-->
+        <!--</div>-->
+      </div>
+
+
+    </div>
+    <!-- End of jobPanel -->
+
+    <!-- Maps Content -->
+    <div class="pull-right" id="map">
+
+    <!-- Google Maps iFrame -->
+      <iframe id="gmap" name="gmap" height="100%" width="100%" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/directions?key= &origin=Rutgers+New+Brunswick&destination=Rutgers+Newark&avoid=tolls|highways"
+        allowfullscreen>
+      </iframe>
+
+    </div>
+    <!-- Maps Content -->
+
+  </div>
+  <!-- End of Main Page Contents -->
+
+<!-- Modal Dialog Box Loader -->
+  <div class="modal" id="ajaxIndicator" data-keyboard="false">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body" style="text-align: center;">
+          <p>Please wait ...</p>
+          <p>
+            <img src="ajax-loader.gif" />
+          </p>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+  <!-- /.modal -->
+  
+  <script>
+    $(document).ready(function() { //when page loaded
+
+      var url = "https://www.google.com/maps/embed/v1/place?key= &q=";
+      var myvar = sessionStorage.myvar;
+      var completeURL = url + myvar; //combine endpoint with myvar stored in session
+
+      if (myvar != undefined) {
+        $("#gmap").attr("src", completeURL); //sets iFrame Google map to address specified on index.html
+        document.getElementById("l").value = myvar; //fills address bars with location input
+      } //end of if statement
+
+    }); //end of $(document).ready(function(){})
+
+    function setSrc(source) { //setSrc function called when directions button clicked
+      $("#gmap").attr("src", source); //sets iFrame Google Map src to appropriate directions search
+    } //end of setSrc(source)
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>JoboGraphic</title>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="google/googleAutocompleteStyles.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+  <script src="https://use.fontawesome.com/61038b3f9a.js"></script>
+  <script src="/jobographic/githubjobs/githubScript.js"></script>
+  <script src="/jobographic/google/googleAutocomplete.js"></script>
+
+</head>
+
+<body>
+
+  <!-- Nav Bar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light" id="nav">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+    <a class="navbar-brand active" id="brand" href="index.html">JoboGraphic <i class="fa fa-map-marker" aria-hidden="true"></i>
+</a>
+
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="jobSearch.html">Jobs</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="companySearch.html">Companies</a>
+        </li>
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+        <li class="mr-2">
+          <a class="nav-link" href="about.html">About Us</a>
+        </li>
+      </ul>
+      <form action="contact.html">
+        <button class="btn btn-primary navbar-btn btn-sm" style="cursor: pointer;">Send Feedback</button>
+      </form>
+    </div>
+  </nav>
+  <!-- End of Nav Bar -->
+
+  <!-- Centerpiece -->
+  <div class="container-fluid center-block" id="centerPiece">
+    <div id="middleBlock" class="container">
+      <h1 id="caption">Your dream job starts here.</h1>
+
+      <!-- Form -->
+      <form role="form" id="getjobs_form" onsubmit="changePage()">
+        <div class="form-row">
+          <div class="col-7 px-0">
+            <!-- Location Input Field -->
+            <input id="ilocation" name="ilocation" class="form-control addressInput" type="search" placeholder="Search by Address" aria-label="Search" autocomplete="off">
+            <!-- Autocomplete Dropdown -->
+            <div class="dropdown" id="querrySuggestion"></div>
+          </div>
+
+          <div class="col-4 px-0">
+            <!-- Search Type Dropdown -->
+            <select class="custom-select" id="st" name="st">
+              <option value="">Search Type</option>
+              <option value="1">Jobs</option>
+              <option value="2">Companies</option>
+            </select>
+          </div>
+
+          <div class="col-1 px-0">
+            <!-- Search Button -->
+            <button id="searchBtn" class="btn btn-primary btn-md" type="submit" style="cursor:pointer;">
+              <i class="fa fa-search" aria-hidden="true"></i>
+            </button>
+          </div>
+
+        </div>
+      </form>
+      <!-- End of Form -->
+    </div>
+  </div>
+  <!-- End of Centerpiece -->
+
+  <div class="container-fluid"></div>
+
+
+  <script>
+  $(document).ready(function() { //when page loaded
+
+      var myvar = sessionStorage.myvar;
+
+      if (myvar != undefined) {
+        document.getElementById("ilocation").value = myvar; //fills address with location input
+      } //end of if statement
+
+    }); //end of $(document).ready(function(){})
+  
+  //Function to change page and store location information called when form is submitted
+    function changePage() {
+      var myvar = $('#ilocation').val(); //store location in myvar
+      var searchType = $('#st').val(); //store selection in searchType
+
+      if(myvar == ""){
+        alert('Please enter a location.'); //throw alert if no location entered
+        return false;
+      }//end of if statement
+
+      if (searchType == 1) {
+        window.location = "jobSearch.html?myvar=" + encodeURIComponent(myvar); //go to jobs page with encoded location
+        sessionStorage.myvar = myvar; //store myvar in session
+
+      }
+      else if (searchType == 2) {
+        window.location = "companySearch.html?myvar=" + encodeURIComponent(myvar); //go to companies page with encoded location
+        sessionStorage.myvar = myvar; //store myvar in session
+      }
+      else {
+        alert('Please select a search type.'); //if no search type (jobs or companies) is selected, throw alert
+      } //end of if else statements
+      
+    } //end of changePage()
+  </script>
+
+</body>
+</html>

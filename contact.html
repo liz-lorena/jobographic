@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Contact | JoboGraphic</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+    <script src="https://use.fontawesome.com/61038b3f9a.js"></script>
+
+    <style>
+        #brand {
+            font-size: 28px;
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+    </style>
+
+</head>
+
+<body>
+
+<!-- Nav Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" id="nav">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" id="brand" href="index.html">JoboGraphic <i class="fa fa-map-marker" aria-hidden="true"></i>
+</a>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="jobSearch.html">Jobs</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="companySearch.html">Companies</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="mr-2">
+                    <a class="nav-link" href="about.html">About Us</a>
+                </li>
+            </ul>
+            <form action="contact.html">
+                <button class="btn btn-primary navbar-btn btn-sm active" style="cursor: pointer;">Send Feedback</button>
+            </form>
+        </div>
+    </nav>
+<!-- End of Nav Bar -->
+
+<!-- Main Page Contents -->
+    <div class="container-fluid contentContainer">
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <!-- Contact Form -->
+                <form>
+                    <div class="form-group"><br>
+                        <input type="text" name="name" class="form-control" placeholder="Name"><br>
+                        <input type="email" name="email" class="form-control" placeholder="Email"><br>
+                        <textarea name="message" name="_replyto" class="form-control" style="height: 300px;" placeholder="Send us your feedback!"></textarea><br>
+                        <input type="text" name="_gotcha" style="display:none">
+                        <button type="submit" class="btn btn-primary">Send</button>
+                    </div>
+                </form>
+                <!-- End of Contact Form -->
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+    </div>
+<!-- End of Main Page Contents -->
+</body>
+</html>
